@@ -1,0 +1,168 @@
+<!-- <div class="example-container">
+    <h2>To do</h2>
+
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+    </div>
+</div>
+
+<div class="example-container">
+    <h2>Done</h2>
+
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-2">
+            <span class="float-end">
+                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"
+                    (click)="openModal()">Add</button>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- This is some text within a card body. -->
+                    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+                        [cdkDropListConnectedTo]="[doneList,doingList]" class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                        <h2 class="card-title">To do</h2>
+                        <div class="card mt-2" *ngFor="let item of todo" cdkDrag>
+                            <div class="card-body">
+                                <h3 class="card-title font-weight-bold">{{item.title}}</h3>
+                                <p class="card-text">{{item.description}}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <h2>To do</h2> -->
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- This is some text within a card body. -->
+                    <div cdkDropList #doingList="cdkDropList" [cdkDropListData]="doing"
+                        [cdkDropListConnectedTo]="[todoList,doneList]" class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                        <h2 class="card-title">Doing</h2>
+                        <div class="card mt-2" *ngFor="let item of doing" cdkDrag>
+                            <div class="card-body">
+                                <h3 class="card-title font-weight-bold">{{item.title}}</h3>
+                                <p class="card-text">{{item.description}}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="example-box" *ngFor="let item of doing" cdkDrag>{{item}}</div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <h2>Doing</h2> -->
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- This is some text within a card body. -->
+                    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
+                        [cdkDropListConnectedTo]="[todoList,doingList]" class="example-list"
+                        (cdkDropListDropped)="drop($event)">
+                        <h2 class="card-title">Done</h2>
+                        <div class="card mt-2" *ngFor="let item of done" cdkDrag>
+                            <div class="card-body">
+                                <h3 class="card-title font-weight-bold">{{item.title}}</h3>
+                                <p class="card-text">{{item.description}}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <h2>Done</h2> -->
+        </div>
+    </div>
+
+</div>
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+                <div class="modal-header text-center bg-primary">
+                    <h3 class="modal-title w-100 text-light" id="exampleModalLabel">Add Task</h3>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <!-- <label for="title">Title</label>
+                        <input type="text" id="title" formControlName="title" class="form-control mt-2" required> -->
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Title</mat-label>
+                            <input matInput placeholder="Title" formControlName="title">
+                        </mat-form-field>
+                        <div *ngIf="form.title.invalid && (form.title.dirty || form.title.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="form.title.errors.required">
+                                Title is required.
+                            </div>
+                            <div *ngIf="form.title.errors.pattern">
+                                Title should only contain Alphabets
+                            </div>
+                            <!--  <div *ngIf="name.errors?.['minlength']">
+                            Name must be at least 4 characters long.
+                        </div>
+                        <div *ngIf="name.errors?.['forbiddenName']">
+                            Name cannot be Bob.
+                        </div> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="description">Description</label>
+                        <input type="text" id="description" formControlName="description" class="form-control mt-2"
+                            required> -->
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                        </mat-form-field>
+                        <div *ngIf="form.description.invalid && (form.description.dirty || form.description.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="form.description.errors.required">
+                                Description is required.
+                            </div>
+                            <div *ngIf="form.description.errors.minlength">
+                                Description must be at least 25 characters long.
+                            </div>
+                            <!-- <div *ngIf="name.errors?.['forbiddenName']">
+                            Name cannot be Bob.
+                        </div> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Column</mat-label>
+                            <mat-select formControlName="column">
+                                <mat-option *ngFor="let col of cols" [value]="col.value">
+                                    {{col.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        (click)="closeModal()">Close</button>
+                    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
