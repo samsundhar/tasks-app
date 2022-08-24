@@ -23,5 +23,13 @@ export class TaskService {
     console.log("on add task")
     return this.http.post(this.rootURL + '/task', { task });
   }
+  deleteTask(id: any) {
+    console.log("on delete task")
+    return this.http.delete(this.rootURL + '/task/' + id);
+  }
+  editTask(id: any, task: any) {
+    console.log("on edit task")
+    return this.http.put(this.rootURL + '/task/' + id, { task });
+  }
 
 }

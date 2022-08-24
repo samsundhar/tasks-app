@@ -20,14 +20,14 @@
         <div class="col-12 mt-2">
             <span class="float-end">
                 <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"
-                    (click)="openModal()">Add</button>
+                    (click)="addTask()">Add</button>
             </span>
 
         </div>
     </div>
 
     <div class="row mt-2">
-        <div class="col-4">
+        <div class="col-md-4 col-12">
             <div class="card">
                 <div class="card-body">
                     <!-- This is some text within a card body. -->
@@ -37,8 +37,17 @@
                         <h2 class="card-title">To do</h2>
                         <div class="card mt-2" *ngFor="let item of todo" cdkDrag>
                             <div class="card-body">
-                                <h3 class="card-title font-weight-bold">{{item.title}}</h3>
-                                <p class="card-text">{{item.description}}</p>
+                                <h3 class="card-title font-weight-bold">{{item.title}}
+                                    <span class="float-end">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill text-danger" viewBox="0 0 16 16"
+                                            (click)="deleteClick(item)">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                    </span>
+                                </h3>
+                                <p class="card-text" (click)="editTask(item)">{{item.description}}</p>
                             </div>
                         </div>
                         <!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
@@ -47,7 +56,7 @@
             </div>
             <!-- <h2>To do</h2> -->
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-12">
             <div class="card">
                 <div class="card-body">
                     <!-- This is some text within a card body. -->
@@ -57,8 +66,15 @@
                         <h2 class="card-title">Doing</h2>
                         <div class="card mt-2" *ngFor="let item of doing" cdkDrag>
                             <div class="card-body">
-                                <h3 class="card-title font-weight-bold">{{item.title}}</h3>
-                                <p class="card-text">{{item.description}}</p>
+                                <h3 class="card-title font-weight-bold">{{item.title}} <span class="float-end">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill text-danger" viewBox="0 0 16 16"
+                                            (click)="deleteClick(item)">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                    </span> </h3>
+                                <p class="card-text" (click)="editTask(item)">{{item.description}}</p>
                             </div>
                         </div>
                         <!-- <div class="example-box" *ngFor="let item of doing" cdkDrag>{{item}}</div> -->
@@ -67,7 +83,7 @@
             </div>
             <!-- <h2>Doing</h2> -->
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-12">
             <div class="card">
                 <div class="card-body">
                     <!-- This is some text within a card body. -->
@@ -77,8 +93,17 @@
                         <h2 class="card-title">Done</h2>
                         <div class="card mt-2" *ngFor="let item of done" cdkDrag>
                             <div class="card-body">
-                                <h3 class="card-title font-weight-bold">{{item.title}}</h3>
-                                <p class="card-text">{{item.description}}</p>
+                                <h3 class="card-title font-weight-bold">{{item.title}}
+                                    <span class="float-end">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash-fill text-danger" viewBox="0 0 16 16"
+                                            (click)="deleteClick(item)">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                    </span>
+                                </h3>
+                                <p class="card-text" (click)="editTask(item)">{{item.description}}</p>
                             </div>
                         </div>
                         <!-- <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div> -->
@@ -95,7 +120,7 @@
         <div class="modal-content">
             <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
                 <div class="modal-header text-center bg-primary">
-                    <h3 class="modal-title w-100 text-light" id="exampleModalLabel">Add Task</h3>
+                    <h3 class="modal-title w-100 text-light" id="exampleModalLabel">{{edit?'Edit':'Add'}} Task</h3>
                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button> -->
@@ -160,7 +185,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         (click)="closeModal()">Close</button>
-                    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Add Task</button>
+                    <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">{{edit?'Edit':'Add'}} Task</button>
                 </div>
             </form>
         </div>
